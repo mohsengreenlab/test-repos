@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congratulations Animation</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #f2f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        header {
+            background-color: #ffdd67;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Button */
+        .check-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.5em;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .check-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Animation Styles */
+        .congrats-message {
+            font-size: 3em;
+            color: #ff6f61;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 1s ease;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        .show {
+            display: block;
+            animation: bounce 2s ease forwards;
+        }
+
+        @keyframes bounce {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) translate(-50%, -50%);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2) translate(-50%, -50%);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translate(-50%, -50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Answer the Question!</h1>
+            <p>What is 2 + 2?</p>
+            <input type="number" id="answerInput" placeholder="Your answer">
+            <button class="check-btn" id="checkAnswerBtn">Submit Answer</button>
+        </header>
+
+        <div class="congrats-message" id="congratsMessage">🎉 Congratulations! 🎉</div>
+    </div>
+
+    <script>
+        const checkAnswerBtn = document.getElementById('checkAnswerBtn');
+        const answerInput = document.getElementById('answerInput');
+        const congratsMessage = document.getElementById('congratsMessage');
+
+        // Function to check the answer
+        function checkAnswer() {
+            const answer = parseInt(answerInput.value);
+            if (answer === 4) {
+                showCongratsMessage();
+            } else {
+                alert("Oops, that's not correct. Try again!");
+            }
+        }
+
+        // Function to display the congratulatory message with animation
+        function showCongratsMessage() {
+            congratsMessage.style.display = 'block'; // Make the message visible
+            congratsMessage.classList.add('show'); // Add the animation class
+
+            // Remove the message after 3 seconds
+            setTimeout(() => {
+                congratsMessage.classList.remove('show');
+                congratsMessage.style.display = 'none';
+            }, 3000);
+        }
+
+        // Event listener for button click
+        checkAnswerBtn.addEventListener('click', checkAnswer);
+    </script>
+</body>
+</html>
